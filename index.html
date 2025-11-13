@@ -1,1 +1,238 @@
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+const InstagramStories = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const stories = [
+    {
+      title: "Holy Shrine",
+      persian: "حرم مقدس",
+      definition: "A sacred religious site revered by followers",
+      example: "Visiting a holy shrine for spiritual connection",
+      gradient: "from-rose-400 via-pink-500 to-purple-600",
+      icon: "🕌"
+    },
+    {
+      title: "Pilgrimage Site",
+      persian: "زیارتگاه",
+      definition: "A destination for religious journeys",
+      example: "Millions travel to pilgrimage sites annually",
+      gradient: "from-amber-400 via-orange-500 to-red-600",
+      icon: "🧭"
+    },
+    {
+      title: "Religious Tourism",
+      persian: "گردشگری مذهبی",
+      definition: "Travel motivated by faith and spirituality",
+      example: "Religious tourism supports local communities",
+      gradient: "from-teal-400 via-cyan-500 to-blue-600",
+      icon: "✈️"
+    },
+    {
+      title: "Imam Reza",
+      persian: "امام رضا",
+      definition: "The eighth Shia Imam, revered figure",
+      example: "Imam Reza's shrine is in Mashhad, Iran",
+      gradient: "from-emerald-400 via-green-500 to-teal-600",
+      icon: "⭐"
+    },
+    {
+      title: "Second Largest City",
+      persian: "دومین شهر بزرگ",
+      definition: "Mashhad: Iran's spiritual capital",
+      example: "Over 3 million people call it home",
+      gradient: "from-violet-400 via-purple-500 to-indigo-600",
+      icon: "🏙️"
+    },
+    {
+      title: "Northeastern Iran",
+      persian: "شمال شرق ایران",
+      definition: "Region rich in history and culture",
+      example: "Gateway to Central Asia and Afghanistan",
+      gradient: "from-fuchsia-400 via-pink-500 to-rose-600",
+      icon: "🗺️"
+    },
+    {
+      title: "Cultural Heritage",
+      persian: "میراث فرهنگی",
+      definition: "Traditions passed through generations",
+      example: "Preserving cultural heritage for the future",
+      gradient: "from-sky-400 via-blue-500 to-indigo-600",
+      icon: "🏛️"
+    },
+    {
+      title: "Visit a Mausoleum",
+      persian: "زیارت آرامگاه",
+      definition: "To pay respects at a sacred tomb",
+      example: "Millions visit mausoleums for blessings",
+      gradient: "from-lime-400 via-green-500 to-emerald-600",
+      icon: "🙏"
+    },
+    {
+      title: "Persian Architecture",
+      persian: "معماری ایرانی",
+      definition: "Intricate designs with domes and tiles",
+      example: "Famous for geometric patterns and calligraphy",
+      gradient: "from-orange-400 via-red-500 to-pink-600",
+      icon: "🕌"
+    },
+    {
+      title: "Islamic Art",
+      persian: "هنر اسلامی",
+      definition: "Artistic expression through faith",
+      example: "Stunning tilework and arabesque designs",
+      gradient: "from-cyan-400 via-teal-500 to-green-600",
+      icon: "🎨"
+    },
+    {
+      title: "Pray at a Shrine",
+      persian: "نماز در حرم",
+      definition: "Spiritual devotion in sacred space",
+      example: "Finding peace through prayer and reflection",
+      gradient: "from-indigo-400 via-purple-500 to-pink-600",
+      icon: "🤲"
+    },
+    {
+      title: "Historical Monuments",
+      persian: "بناهای تاریخی",
+      definition: "Ancient structures telling stories of the past",
+      example: "Centuries-old monuments still standing proud",
+      gradient: "from-yellow-400 via-amber-500 to-orange-600",
+      icon: "🏰"
+    },
+    {
+      title: "Traditional Bazaar",
+      persian: "بازار سنتی",
+      definition: "Ancient marketplace buzzing with life",
+      example: "Shop for spices, carpets, and handicrafts",
+      gradient: "from-red-400 via-rose-500 to-pink-600",
+      icon: "🛍️"
+    },
+    {
+      title: "Religious Ceremonies",
+      persian: "مراسم مذهبی",
+      definition: "Sacred rituals and communal gatherings",
+      example: "Experiencing deep spiritual connections",
+      gradient: "from-purple-400 via-violet-500 to-indigo-600",
+      icon: "🕯️"
+    },
+    {
+      title: "Cultural Destination",
+      persian: "مقصد فرهنگی",
+      definition: "Places rich in tradition and heritage",
+      example: "Immerse yourself in authentic experiences",
+      gradient: "from-pink-400 via-rose-500 to-red-600",
+      icon: "🌍"
+    },
+    {
+      title: "Persian Cuisine",
+      persian: "غذاهای ایرانی",
+      definition: "Aromatic dishes with saffron and herbs",
+      example: "Savor kebabs, rice, and fragrant stews",
+      gradient: "from-green-400 via-emerald-500 to-teal-600",
+      icon: "🍽️"
+    }
+  ];
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % stories.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + stories.length) % stories.length);
+  };
+
+  const currentStory = stories[currentSlide];
+
+  return (
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+      <div className="relative w-full max-w-md">
+        {/* Progress bars */}
+        <div className="flex gap-1 mb-2">
+          {stories.map((_, index) => (
+            <div
+              key={index}
+              className="h-0.5 flex-1 bg-gray-600 rounded-full overflow-hidden"
+            >
+              <div
+                className={`h-full bg-white transition-all duration-300 ${
+                  index === currentSlide ? 'w-full' : index < currentSlide ? 'w-full' : 'w-0'
+                }`}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Story Card */}
+        <div className={`relative bg-gradient-to-br ${currentStory.gradient} rounded-3xl overflow-hidden shadow-2xl aspect-[9/16]`}>
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -mr-32 -mt-32" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-10 rounded-full -ml-24 -mb-24" />
+          
+          {/* Content */}
+          <div className="relative h-full flex flex-col justify-between p-8">
+            {/* Top section */}
+            <div className="text-center">
+              <div className="text-7xl mb-6 animate-bounce">{currentStory.icon}</div>
+              <h2 className="text-4xl font-bold text-white mb-3 drop-shadow-lg">
+                {currentStory.title}
+              </h2>
+              <p className="text-2xl text-white/90 font-medium mb-8">
+                {currentStory.persian}
+              </p>
+            </div>
+
+            {/* Middle section */}
+            <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 border border-white/30">
+              <p className="text-white text-lg leading-relaxed mb-4">
+                {currentStory.definition}
+              </p>
+              <div className="h-px bg-white/40 my-4" />
+              <p className="text-white/90 text-base italic">
+                💡 {currentStory.example}
+              </p>
+            </div>
+
+            {/* Bottom section */}
+            <div className="text-center">
+              <div className="inline-block bg-white/25 backdrop-blur-sm rounded-full px-6 py-3 border border-white/40">
+                <p className="text-white font-semibold text-sm">
+                  {currentSlide + 1} / {stories.length}
+                </p>
+              </div>
+              <p className="text-white/80 text-xs mt-4">
+                Ben Siran Academy
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation buttons */}
+        <div className="flex justify-between mt-4">
+          <button
+            onClick={prevSlide}
+            className="bg-white/20 backdrop-blur-md text-white p-3 rounded-full hover:bg-white/30 transition-all"
+            disabled={currentSlide === 0}
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="bg-white/20 backdrop-blur-md text-white p-3 rounded-full hover:bg-white/30 transition-all"
+            disabled={currentSlide === stories.length - 1}
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Counter */}
+        <div className="text-center mt-4 text-white/60 text-sm">
+          Swipe or use arrows to navigate
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default InstagramStories;
